@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import WeatherApp from './WeatherApp';
 
 class GeoLocation extends Component {
     constructor(props) {
@@ -56,7 +57,7 @@ class GeoLocation extends Component {
     render() {
         return (
             <div className="GeoLocation">
-                <h2>Plan your next event</h2>
+                <h1>Here is the location info</h1>
                 <br />
                 <p>latitude: {this.state.latitude}</p>
                 <p>longitude: {this.state.longitude}</p>
