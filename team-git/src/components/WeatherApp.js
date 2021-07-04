@@ -1,36 +1,39 @@
 import React, { useEffect, useState } from 'react';
-import WeatherAppDisplay from './WeatherAppDisplay';
-import GeoLocation from './GeoLocation';
 
 const weatherApi = `${process.env.REACT_APP_WEATHER_ENDPOINT}`;
 const weatherApiKey = `${process.env.REACT_APP_WEATHER_API_KEY}`;
-const lat = GeoLocation.latitude;
-console.log("checking lat var" + lat);
 
-function WeatherApp() {
-    let url = `${weatherApi}q=London&units=imperial&appid=${weatherApiKey}`
-    const [results, setResults] = useState(null);
-
+function WeatherApp(props) {
+    const lat = props.lat
+    const lon = props.lon
+    let url = `${weatherApi}lat=${lat}&lon=${lon}&units=imperial&appid=${weatherApiKey}`
+    console.log(url)
+    const [results, setResults] = useState([1]);
+    
+    
     useEffect(() => {
-        fetchWeather();
-
-        async function fetchWeather() {
-            const res = await fetch(url);
-            const data = await res.json();
-            setResults(data);
-            // let iconCode = results.weather[0].icon;
-            // let iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
-        }
+        fetch(url)
+        .then((res) => res.json())
+        .then((data) => setResults(data))
+        console.log("look here" + JSON.stringify(results))
     }, []);
 
-    if (!results) return <div />;
+    //     async function fetchWeather() {
+    //         const res = await fetch(url);
+    //         const data = await res.json();
+    //         setResults(data);
+    //         // let iconCode = results.weather[0].icon;
+    //         // let iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
+    //     }
+    // }, []);
+
+    // if (!results) return <div />;
 
     return(
         <div>
-            <h1>Weather in {JSON.stringify(results.name)}</h1>
-            <h2>Temperature: {JSON.stringify(results.main.temp)}</h2>
-            {/* <h1 id="icon"><img id="wicon" src={`iconUrl`} alt="weather icon"></img></h1> */}
-            <h2>Forecast: {JSON.stringify(results.weather[0].description)}</h2>
+            <h2>Here is the weather: {JSON.stringify(results)}</h2>
+            <p>test{props.lat}</p>
+            <p>{props.lon}</p>
             
         </div>
     )

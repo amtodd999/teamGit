@@ -1,12 +1,12 @@
 import './App.css';
 import WeatherApp from './components/WeatherApp';
-import GeoLocation from './components/GeoLocation';
+import Location from './components/Location';
 
 function App() {
   return (
     <div className="App">
-      <WeatherApp />
-      <GeoLocation />
+      {/* <WeatherApp /> */}
+      <Location />
     </div>
   );
 }
