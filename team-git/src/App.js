@@ -18,6 +18,10 @@ const App = () => {
 }
 componentDidMount();
 
+=======
+import './App.css';
+import WeatherApp from './components/WeatherApp';
+import GeoLocation from './components/GeoLocation';
 
   return (
     <div className="App">    
@@ -30,6 +34,11 @@ componentDidMount();
     </div>  
 
       
+=======
+    <div className="App">
+      <WeatherApp />
+      <GeoLocation />
+    </div>
   );
 }
 
