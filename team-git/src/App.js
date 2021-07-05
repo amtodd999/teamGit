@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
+import Header from './site/Header'
 import SatelliteImage from './components/SatelliteImage';
 // import GeoLocation from './components/GeoLocation';
 
@@ -19,12 +20,16 @@ componentDidMount();
 
 
   return (
-    <div className="App">
+    <div className="App">    
+
+      <Header />
       <SatelliteImage 
         lat={lat}
         lon={lon}
       />
-    </div>
+    </div>  
+
+      
   );
 }
 
