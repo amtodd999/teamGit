@@ -28,7 +28,6 @@ componentDidMount();
       />
        <WeatherApp />
     </div>  
-
   );
 }
 
