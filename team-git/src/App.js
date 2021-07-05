@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
 import './App.css';
 import Header from './site/Header'
 import SatelliteImage from './components/SatelliteImage';
-// import GeoLocation from './components/GeoLocation';
+import React, {Component, useState, useEffect} from 'react';
+import WeatherApp from './components/WeatherApp';
 
 const App = () => {
 
@@ -18,11 +18,6 @@ const App = () => {
 }
 componentDidMount();
 
-=======
-import './App.css';
-import WeatherApp from './components/WeatherApp';
-import GeoLocation from './components/GeoLocation';
-
   return (
     <div className="App">    
 
@@ -31,14 +26,9 @@ import GeoLocation from './components/GeoLocation';
         lat={lat}
         lon={lon}
       />
+       <WeatherApp />
     </div>  
 
-      
-=======
-    <div className="App">
-      <WeatherApp />
-      <GeoLocation />
-    </div>
   );
 }
 
