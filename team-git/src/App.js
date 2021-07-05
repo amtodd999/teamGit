@@ -1,5 +1,7 @@
 import './App.css';
-import React, { Component, useState, useEffect } from 'react';
+import Header from './site/Header'
+import SatelliteImage from './components/SatelliteImage';
+import React, {Component, useState, useEffect} from 'react';
 import WeatherApp from './components/WeatherApp';
 import TicketMaster from './components/TicketMaster';
 
@@ -26,7 +28,11 @@ const App = () => {
   // componentDidMount();
     return (
       <div className="App">
-
+      <Header />
+      <SatelliteImage 
+        lat={lat}
+        lon={lon}
+      />
         <WeatherApp />
         <TicketMaster lat={lat} lon={lon} />
       </div>
