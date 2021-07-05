@@ -1,76 +1,82 @@
-import React, { useEffect, useState } from 'react';
-
+import React, { Component } from 'react';
 const weatherApi = `${process.env.REACT_APP_WEATHER_ENDPOINT}`;
 const weatherApiKey = `${process.env.REACT_APP_WEATHER_API_KEY}`;
 
-function WeatherApp(props) {
-    const lat = props.lat
-    const lon = props.lon
-    let url = `${weatherApi}lat=${lat}&lon=${lon}&units=imperial&appid=${weatherApiKey}`
-    console.log(url)
-    const [results, setResults] = useState([1]);
-    
-    
-    useEffect(() => {
-        fetch(url)
-        .then((res) => res.json())
-        .then((data) => setResults(data))
-        console.log("look here" + JSON.stringify(results))
-    }, []);
+class WeatherApp extends Component {
+    state = {
+        lat: undefined,
+        lon: undefined,
+        city: undefined,
+        temperatureC: undefined,
+        temperatureF: undefined,
+        icon: undefined,
+        description: undefined,
+        errorMessage: undefined,
+    }
 
-    //     async function fetchWeather() {
-    //         const res = await fetch(url);
-    //         const data = await res.json();
-    //         setResults(data);
-    //         // let iconCode = results.weather[0].icon;
-    //         // let iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
-    //     }
-    // }, []);
+    getPosition = () => {
+        return new Promise(function (resolve, reject) {
+            navigator.geolocation.getCurrentPosition(resolve, reject);
+        });
+    }
 
-    // if (!results) return <div />;
+    getWeather = async (lat, lon) => {
+        let url = `${weatherApi}lat=${lat}&lon=${lon}&units=imperial&appid=${weatherApiKey}`
+        const api_call = await fetch(url);
+        const data = await api_call.json();
+        this.setState({
+            lat: lat,
+            lon: lon,
+            city: data.name,
+            temperatureC: Math.round(data.main.temp),
+            temperatureF: Math.round(data.main.temp * 1.8 + 32),
+            description: data.weather[0].description,
+        })
+    }
 
-    return(
-        <div>
-            <h2>Here is the weather: {JSON.stringify(results)}</h2>
-            <p>test{props.lat}</p>
-            <p>{props.lon}</p>
-            
-        </div>
-    )
+
+    componentDidMount() {
+        this.getPosition()
+            .then((position) => {
+                this.getWeather(position.coords.latitude, position.coords.longitude)
+            })
+            .catch((err) => {
+                this.setState({ errorMessage: err.message });
+            });
+
+        this.timerID = setInterval(
+            () =>
+                this.getWeather(this.state.lat, this.state.lon),
+            60000
+        );
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.timerID);
+    }
+
+    render() {
+        const { city, temperatureC, temperatureF, description } = this.state;
+        if (city) {
+            return (
+                <div>
+                    
+                        <h1>Weather today in {city}</h1>
+                        <h2>{temperatureC} &deg;C <span>/</span> {temperatureF} &deg;F</h2>
+                        <h2>
+                            
+                            <span>Description: {description}</span>
+                            
+                        </h2>
+                </div>
+            );
+        }
+        else {
+            return (
+                <div>Loading...</div>
+            )
+        }
+    }
 }
-// const WeatherApp = () => {
-//     const [results, setResults] = useState({});
-
-//     const fetcher = () => {
-//         let url = `${weatherApi}q=London&units=imperial&appid=${weatherApiKey}`
-//         console.log(url);
-
-//         fetch(url)
-//         .then(res => {
-//             if(res.status !== 200){
-//                 throw new Error('fetch error')
-//             } else return res.json();
-//         })
-//         .then(data => {
-//             console.log(data);
-//             const { temp } = data.main; 
-//             console.log(temp);
-//             const { description } = data.weather[0]; 
-//             console.log(description);
-//             const { name } = data;
-//             console.log(name);
-//             setResults(data);
-//             console.log(setResults)
-//         })
-//         .catch(err => console.log(err))
-//     }
-// return(
-//     <div>
-//         <button onClick={fetcher}>Click for Weather</button>
-        
-        
-//     </div>
-// )
-// }
 
 export default WeatherApp;

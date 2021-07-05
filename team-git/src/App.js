@@ -1,12 +1,13 @@
 import './App.css';
+import React, {Component, useState, useEffect} from 'react';
 import WeatherApp from './components/WeatherApp';
-import Location from './components/Location';
 
-function App() {
+const App = () => {
+  
   return (
     <div className="App">
-      {/* <WeatherApp /> */}
-      <Location />
+      
+      <WeatherApp />
     </div>
   );
 }
