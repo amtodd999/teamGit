@@ -1,6 +1,21 @@
 .App {
   text-align: center;
+  background-color: lightslategray;
 }
+
+/* Header */
+
+.headerBg {
+  padding: 20px;
+  background-color: white;
+}
+
+.headerLogo {
+  max-height: 10%;
+  width: auto;
+}
+
+/* Satellite */
 
 .satellite-image {
   border-radius: 30px 30px 30px 30px;

@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import WeatherApp from './WeatherApp';
 import SatelliteImage from './SatelliteImage';
+import { Router, Link, Switch } from 'react-router';
 
 const Location = () => {
     const [lat, setLat] = useState('');
