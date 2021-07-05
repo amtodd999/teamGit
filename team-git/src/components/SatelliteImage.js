@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 const nasaURL = 'https://api.nasa.gov/planetary/earth/imagery';
 const nasaKey = 'H289RgpfJ9E7R6aCnb9duEr58ida91fWMV2icKNt';
 
@@ -20,3 +21,4 @@ const SatelliteImage = (props) => {
 }
 
 export default SatelliteImage;
+

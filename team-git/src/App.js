@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import Header from './site/Header'
 import SatelliteImage from './components/SatelliteImage';
-// import GeoLocation from './components/GeoLocation';
+
 
 const App = () => {
 
@@ -18,7 +18,6 @@ const App = () => {
 }
 componentDidMount();
 
-
   return (
     <div className="App">    
 
@@ -28,8 +27,7 @@ componentDidMount();
         lon={lon}
       />
     </div>  
-
-      
+  
   );
 }
 
