@@ -1,37 +1,36 @@
-import React, { useEffect, useState } from 'react';
-// import GeoLocation from "./GeoLocation";
-// import SatelliteDisplay from "./SatelliteDisplay"
+import React from 'react';
+// import GeoLocation from './GeoLocation';
 
-const baseURL = 'https://api.nasa.gov/planetary/earth/imagery';
-const key = process.env.REACT_APP_NASA_KEY;
+// const nasaURL = process.env.REACT_APP_NASA_ENDPOINT;
+// const nasaKey = process.env.REACT_APP_NASA_KEY;
+const nasaURL = 'https://api.nasa.gov/planetary/earth/imagery';
+const nasaKey = 'H289RgpfJ9E7R6aCnb9duEr58ida91fWMV2icKNt';
+// const lat = GeoLocation.latitude;
 
-const SatelliteImage = () => {
-    const [ photoData, setPhotoData ] = useState(null);
 
-    useEffect(() => {
-        fetchPhoto();
 
-        async function fetchPhoto() {
-            const res = await fetch(
-                `${baseURL}?lon=100.75&lat=1.5&date=2014-02-01&api_key=${key}`
-            );
-            const data = await res.json();
-            setPhotoData(data)
-        }
-    }, []);
 
-    if (!photoData) return <div />;
+
+const SatelliteImage = (props) => {
+
+    const lat = props.lat;
+    const lon = props.lon;
+
+
+    let url = `${nasaURL}?lon=${lon}&lat=${lat}&dim=0.05&api_key=${nasaKey}`
+    // let url = `${nasaURL}?lon=45&lat=45&api_key=${nasaKey}`
 
     return (
-        <div className="satellite-image">
-            <img
-            src={photoData.url}
-            alt={photoData.title}
-            className="photo"
-            />
+        // <div>
+        //     <img src={url} alt='Nasa Satellite' className='satellite-image' style={{width: '500px', height: '600px'}} />
+        // </div>
+
+        <div style={{backgroundImage: `url('${url}')`, backgroundSize: 'cover', height: '100vh' }} >
+            hello
         </div>
     )
 
-    }
+}
+
 
 export default SatelliteImage;
