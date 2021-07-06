@@ -1,13 +1,48 @@
 .App {
   text-align: center;
-  background-color: lightslategray;
+}
+
+.mainDiv {
+  padding:20px;
+}
+
+.firstCol {
+  background-color: firebrick;
+  float: left;
+  padding: 30px;
+  margin: 40px;
+  margin-left: 70px;
+  border-radius: 30px;
+}
+
+.secondCol {
+  background-color:#006bb3;
+  float: right;
+  padding: 30px;
+  margin: 40px;
+  margin-right: 70px;
+  border-radius: 30px;
+  text-align: left;
+  color: white;
+}
+
+/* text */
+
+h1 {
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  color: white;
+}
+
+p {
+  font-family: 'Open Sans', sans-serif;
 }
 
 /* Header */
 
 .headerBg {
   padding: 20px;
-  background-color: white;
+  background-color: whitesmoke;
 }
 
 .headerLogo {
