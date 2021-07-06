@@ -19,7 +19,7 @@ class WeatherApp extends Component {
         });
     }
 
-    getWeather = async (lat, lon) => {
+    getWeather = async (lat, lon, temperatureC, temperatureF) => {
         let url = `${weatherApi}lat=${lat}&lon=${lon}&units=metric&appid=${weatherApiKey}`
         const api_call = await fetch(url);
         const data = await api_call.json();
@@ -32,7 +32,6 @@ class WeatherApp extends Component {
             description: data.weather[0].description,
         })
     }
-
 
     componentDidMount() {
         this.getPosition()
@@ -54,28 +53,24 @@ class WeatherApp extends Component {
         clearInterval(this.timerID);
     }
 
-render() {
-    const { city, temperatureC, temperatureF, description } = this.state;
-    if (city) {
-        return (
-            <div>
+    render() {
+        const { city, temperatureC, temperatureF, description } = this.state;
+        if (city) {
+            return (
+                <div>
 
-                <h1>Weather today in {city}</h1>
-                <h2>{temperatureC} &deg;C <span>/</span> {temperatureF} &deg;F</h2>
-                <h2>
-
-                    <span>Description: {description}</span>
-
-                </h2>
-            </div>
-        );
+                    <h1>Weather today in {city}</h1>
+                    <h2>{temperatureC} &deg;C <span>/</span> {temperatureF} &deg;F</h2>
+                    <h2><span>Description: {description}</span></h2>
+                </div>
+            );
+        }
+        else {
+            return (
+                <div>Loading...</div>
+            )
+        }
     }
-    else {
-        return (
-            <div>Loading...</div>
-        )
-    }
-}
 }
 
 export default WeatherApp;
@@ -98,7 +93,7 @@ export default WeatherApp;
 //         };
 //         getLocalWeather();
 //     }, [url])
-    
+
 
 //     if (lat && lon) {
 //         let temperatureC = Math.round(weather.main.temp);
