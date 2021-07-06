@@ -29,7 +29,7 @@ const App = () => {
           <br />
           <WeatherApp />
           <br />
-          <h5>Satellite Image<SatelliteImage lat={lat} lon={lon} /></h5>
+          <h4>Satellite Image<SatelliteImage lat={lat} lon={lon} /></h4>
 
         </div>
         <div className="secondCol">
